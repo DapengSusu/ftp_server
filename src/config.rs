@@ -19,7 +19,8 @@ impl Config {
             work_dir: None,
         }
     }
-    pub fn new(cfg_path: &Path) -> Self {
+    pub fn new(cfg_path: &str) -> Self {
+        let cfg_path = Path::new(cfg_path);
         let mut cfg = File::open(cfg_path).expect("Open file config failed.");
         let mut contents = String::new();
         let mut cfg_map = HashMap::new();

@@ -10,6 +10,7 @@ pub enum SvrReply {
     CurrentDirectory(String),                          // 257
     RequestPasswd(String),                             // 331
     RequestUser,                                       // 332
+    UnableOpenDataConnection,                          // 425
     AbandonConnection,                                 // 426
     InvalidCommand(String),                            // 500
     WrongCommandParameter(String, String),             // 501
@@ -33,6 +34,7 @@ pub fn generate_reply_message(reply: SvrReply) -> String {
         SvrReply::CurrentDirectory(dir) => "257 ".to_string() + "\"" + &dir + "\" is current directory.",
         SvrReply::RequestPasswd(user) => "331 Password required for ".to_string() + &user + ".",
         SvrReply::RequestUser => "332 User required for logging in.".to_string(),
+        SvrReply::UnableOpenDataConnection => "425 Unable to open data connection.".to_string(),
         SvrReply::AbandonConnection => "426 Abandon the connection.".to_string(),
         SvrReply::InvalidCommand(cmd) => "500 ".to_string() + &cmd + " command is invalid.",
         SvrReply::WrongCommandParameter(cmd, para) => {
